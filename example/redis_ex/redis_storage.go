@@ -16,7 +16,7 @@ func (c *CacheStorage) Del(key string) (int64, error) {
 	return 0, nil
 }
 
-func (c *CacheStorage) SetString(key, value string) (err error) {
+func (c *CacheStorage) SetString(key, value string, expire int) (err error) {
 	RDB[key] = value
 	return nil
 }

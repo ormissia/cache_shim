@@ -18,6 +18,10 @@ func (t *UserEx) CacheKey() string {
 	return strconv.Itoa(t.ID)
 }
 
+func (t *UserEx) Expiration() int {
+	return 1
+}
+
 func (t *UserEx) Delete() error {
 	delete(db, t.ID)
 	return nil

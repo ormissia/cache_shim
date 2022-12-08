@@ -4,7 +4,7 @@ import "sync"
 
 type CacheClint interface {
 	Del(key string) (int64, error)
-	SetString(key, value string) error
+	SetString(key, value string, expire int) error
 	GetString(k string) (string, error)
 }
 

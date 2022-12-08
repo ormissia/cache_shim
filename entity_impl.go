@@ -30,7 +30,7 @@ func Select[T CacheType](entity CacheType) (res T, err error) {
 		}
 		go func() {
 			// 缓存
-			_ = CacheClient().SetString(entity.CacheKey(), string(entityMarshal(entity)))
+			_ = CacheClient().SetString(entity.CacheKey(), string(entityMarshal(entity)), entity.Expiration())
 		}()
 		return entity.(T), nil
 	}
