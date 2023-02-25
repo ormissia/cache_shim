@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"time"
-
 	"github.com/ormissia/cache_shim"
 	"github.com/ormissia/cache_shim/example/db_ex"
 	"github.com/ormissia/cache_shim/example/redis_ex"
@@ -16,15 +14,18 @@ func main() {
 	t1 := &db_ex.UserEx{
 		ID:   1,
 		Age:  123,
-		Name: "xiaoming",
+		Name: "ormissia",
 	}
 
-	_ = t1.Insert()
-	t, err := cache_shim.Select[*db_ex.UserEx](t1)
+	// 插入之后再通过相同的ID去查询
+	_ = cache_shim.Insert(t1)
+
+	t2 := &db_ex.UserEx{
+		ID: 1,
+	}
+	t, err := cache_shim.Select[*db_ex.UserEx](t2)
 
 	fmt.Println()
 	fmt.Printf("t.type: %T\tt: %v\terr: %v", t, t, err)
 	fmt.Println()
-
-	time.Sleep(time.Second * 3)
 }

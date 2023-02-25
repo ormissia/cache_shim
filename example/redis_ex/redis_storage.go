@@ -1,6 +1,8 @@
 package redis_ex
 
-import "errors"
+import (
+	"errors"
+)
 
 type CacheStorage map[string]interface{}
 

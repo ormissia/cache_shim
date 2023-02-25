@@ -5,6 +5,7 @@ type CacheType interface {
 	CacheKey() string
 	Expiration() int
 
+	Insert() error
 	Delete() error
 	Select() error
 	Update() error
