@@ -8,8 +8,9 @@ import (
 )
 
 func main() {
+
 	redis_ex.Init()
-	cache_shim.InitCacheClient(&redis_ex.RDB)
+	client := cache_shim.InitCacheClient(&redis_ex.RDB)
 
 	t1 := &db_ex.UserEx{
 		ID:   1,
@@ -18,12 +19,12 @@ func main() {
 	}
 
 	// 插入之后再通过相同的ID去查询
-	_ = cache_shim.Insert(t1)
+	_ = cache_shim.Insert(client, t1)
 
 	t2 := &db_ex.UserEx{
 		ID: 1,
 	}
-	t, err := cache_shim.Select[*db_ex.UserEx](t2)
+	t, err := cache_shim.Select[*db_ex.UserEx](client, t2)
 
 	fmt.Println()
 	fmt.Printf("t.type: %T\tt: %v\terr: %v", t, t, err)
